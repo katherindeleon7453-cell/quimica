@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Química del Amor - Reacciones Químicas en el Cuerpo y Cerebro</title>
+  
+ 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+    
+      --bg-primary: #fcf8f9;
+      --bg-surface: #ffffff;
+      --bg-card: #ffffff;
+      --text-main: #2d2729;
+      --text-muted: #6b5e62;
+      --border-color: #ebdcdb;
+      
+      --accent-main: #b83253;
+      --accent-hover: #962541;
+      --accent-light: #fbebf0;
+      --accent-subtle: #f7d6de;
+      
+      --secondary-main: #8a3b68;
+      --secondary-light: #f5eaf0;
+      
+      --shadow-sm: 0 2px 8px rgba(184, 50, 83, 0.05);
+      --shadow-md: 0 6px 16px rgba(184, 50, 83, 0.08);
+      --shadow-lg: 0 12px 32px rgba(184, 50, 83, 0.12);
+      
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      
+      --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    
+    [data-theme="sepia"] {
+      --bg-primary: #f7f3ed;
+      --bg-surface: #fffdf9;
+      --bg-card: #fcf9f2;
+      --text-main: #362e2b;
+      --text-muted: #73645d;
+      --border-color: #e8ded1;
+      --accent-main: #a64b2a;
+      --accent-hover: #873a1f;
+      --accent-light: #f7eae1;
+      --accent-subtle: #f0d5c4;
+      --secondary-main: #735438;
+      --secondary-light: #f0e8df;
+      --shadow-sm: 0 2px 8px rgba(166, 75, 42, 0.05);
+      --shadow-md: 0 6px 16px rgba(166, 75, 42, 0.08);
+   
+    }
+
+
+    [data-theme="dark"] {
+      --bg-primary: #121013;
+      --bg-surface: #1e191d;
+      --bg-card: #262025;
+      --text-main: #f3ebf0;
+      --text-muted: #b0a2aa;
+      --border-color: #3b3038;
+      --accent-main: #e65275;
+      --accent-hover: #ff6b8d;
+      --accent-light: #331e26;
+      --accent-subtle: #4a2533;
+      --secondary-main: #c76ba0;
+      --secondary-light: #2c1d27;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.4);
+      
+      
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      line-height: 1.6;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      padding-bottom: 60px;
+    }
+
+    h1, h2, h3, h4, .serif-font {
+      font-family: 'Playfair Display', serif;
+    }
+
+    .container {
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+     
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      transition: background-color 0.3s ease;
+    }
+
+    [data-theme="sepia"] .top-bar {
+      background-color: rgba(255, 253, 249, 0.85);
+    }
+    [data-theme="dark"] .top-bar {
+      background-color: rgba(30, 25, 29, 0.85);
+    }
+
+    .top-bar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 64px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--accent-main);
+    }
+
+    .brand i {
+      font-size: 1.3rem;
+    }
+
+    .controls-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .theme-selector {
+      display: flex;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-full);
+      padding: 3px;
+      gap: 2px;
+    }
+
+    .theme-btn {
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      font-size: 0.825rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+
+    .theme-btn.active, .theme-btn:hover {
+      background: var(--accent-main);
+      color: #ffffff;
+    }
+
+    
+    .academic-card {
+      margin-top: 32px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .academic-card-header {
+      background: linear-gradient(135deg, var(--accent-main), var(--secondary-main));
+      color: #ffffff;
+      padding: 32px;
+      position: relative;
+    }
+
+    .academic-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(4px);
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 16px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .academic-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .academic-subtitle {
+      font-size: 1.05rem;
+      opacity: 0.9;
+      max-width: 700px;
+      font-weight: 300;
+    }
+
+    .academic-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      padding: 28px 32px;
+      background-color: var(--bg-surface);
+    }
+
+    .data-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .data-item .label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .data-item .value {
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+
+    .section-nav {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 16px 0;
+      margin: 24px 0 32px 0;
+      border-bottom: 1px solid var(--border-color);
+      scrollbar-width: thin;
+    }
+
+    .nav-link-item {
+      text-decoration: none;
+      color: var(--text-muted);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      padding: 8px 18px;
+      border-radius: var(--radius-full);
+      font-size: 0.9rem;
+      font-weight: 500;
+      white-space: nowrap;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-link-item:hover {
+      border-color: var(--accent-main);
+      color: var(--accent-main);
+      transform: translateY(-1px);
+    }
+
+    .content-section {
+      margin-bottom: 48px;
+    }
+
+    .section-title {
+      font-size: 1.65rem;
+      color: var(--text-main);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 2px solid var(--accent-light);
+      padding-bottom: 10px;
+    }
+
+    .section-title i {
+      color: var(--accent-main);
+    }
+
+    .text-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 24px;
+    }
+
+    .text-card p {
+      margin-bottom: 16px;
+      font-size: 1.02rem;
+    }
+
+    .text-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .stages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 20px;
+    }
+
+    .stage-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      position: relative;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    .stage-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--accent-subtle);
+    }
+
+    .stage-number {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--accent-light);
+      font-family: 'Playfair Display', serif;
+    }
+
+    [data-theme="dark"] .stage-number {
+      color: var(--border-color);
+    }
+
+    .stage-title {
+      font-size: 1.25rem;
+      color: var(--accent-main);
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .stage-subtitle {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--secondary-main);
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    .molecules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .molecule-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+      border-left: 4px solid var(--accent-main);
+      transition: var(--transition);
+    }
+
+    .molecule-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .molecule-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .molecule-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .molecule-tag {
+      background: var(--accent-light);
+      color: var(--accent-main);
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+    }
+
+    .symptoms-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .symptom-item {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .symptom-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      color: var(--accent-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .symptom-info h4 {
+      font-size: 0.95rem;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .symptom-info p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .myths-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .myths-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .myth-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 20px;
+    }
+
+    .myth-title {
+      color: #d93838;
+      font-size: 0.92rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .reality-title {
+      color: #2e7d32;
+      font-size: 0.92rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+      margin-top: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .quiz-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .quiz-question {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--text-main);
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .quiz-option {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      padding: 12px 18px;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .quiz-option:hover {
+      border-color: var(--accent-main);
+      background: var(--accent-light);
+    }
+
+    .quiz-option.correct {
+      background-color: #e8f5e9;
+      border-color: #2e7d32;
+      color: #1b5e20;
+      font-weight: 600;
+    }
+
+    .quiz-option.incorrect {
+      background-color: #ffebee;
+      border-color: #c62828;
+      color: #b71c1c;
+    }
+
+    .quiz-feedback {
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+      margin-top: 12px;
+      display: none;
+    }
+
+    .quiz-feedback.show {
+      display: block;
+    }
+
+    .quiz-feedback.correct {
+      background: #e8f5e9;
+      color: #1b5e20;
+      border: 1px solid #a5d6a7;
+    }
+
+    .quiz-feedback.incorrect {
+      background: #ffebee;
+      color: #b71c1c;
+      border: 1px solid #ef9a9a;
+    }
+
+    footer {
+      text-align: center;
+      padding: 32px 0 16px 0;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      border-top: 1px solid var(--border-color);
+      margin-top: 48px;
+    }
+
+    @media (max-width: 600px) {
+      .academic-title { font-size: 1.6rem; }
+      .academic-card-header { padding: 20px; }
+      .academic-grid { padding: 20px; grid-template-columns: 1fr; }
+      .text-card { padding: 20px; }
+      .section-title { font-size: 1.35rem; }
+    }
+  </style>
+</head>
+<body data-theme="light">
+
+ 
+  <header class="top-bar">
+    <div class="container top-bar-inner">
+      <div class="brand">
+        <i class="fa-solid fa-flask-vial"></i>
+        <span>Química del Amor</span>
+      </div>
+      <div class="controls-group">
+        <div class="theme-selector" title="Seleccionar Tema de Lectura">
+          <button class="theme-btn active" onclick="setTheme('light')" id="btn-theme-light">
+            <i class="fa-solid fa-sun"></i> Claro
+          </button>
+          <button class="theme-btn" onclick="setTheme('sepia')" id="btn-theme-sepia">
+            <i class="fa-solid fa-book-open"></i> Cálido
+          </button>
+          <button class="theme-btn" onclick="setTheme('dark')" id="btn-theme-dark">
+            <i class="fa-solid fa-moon"></i> Oscuro
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+
+    <section class="academic-card">
+      <div class="academic-card-header">
+        <div class="academic-badge">
+          <i class="fa-solid fa-graduation-cap"></i> ACT_12
+        </div>
+        <h1 class="academic-title">La Química del Amor</h1>
+        <p class="academic-subtitle">Análisis Neurobiológico y Hormonal de las Reacciones Químicas del amor</p>
+      </div>
+      
+      <div class="academic-grid">
+        <div class="data-item">
+          <span class="label"><i class="fa-solid fa-school"></i> Institución</span>
+          <span class="value">Escuela Preparatoria Nº17</span>
+        </div>
+        <div class="data-item">
+          <span class="label"><i class="fa-solid fa-book"></i> Asignatura</span>
+          <span class="value">REACCIONES QUIMICAS</span>
+        </div>
+        <div class="data-item">
+          <span class="label"><i class="fa-solid fa-user-tie"></i> Docente</span>
+          <span class="value">MARIA BEATRIZ ALCARAZ MARTINEZ</span>
+        </div>
+        <div class="data-item">
+          <span class="label"><i class="fa-solid fa-users"></i> Grupo / Grado</span>
+          <span class="value">5ºA V BTDS 2026B</span>
+        </div>
+        <div class="data-item">
+          <span class="label"><i class="fa-solid fa-user-graduate"></i> Estudiante</span>
+          <span class="value">KATHERIN GISELLE DE LEON RUIZ</span>
+        </div>
+        <div class="data-item">
+          <span class="label"><i class="fa-solid fa-calendar-day"></i> Fecha de Entrega</span>
+          <span class="value">30/10/26</span>
+        </div>
+      </div>
+    </section>
+
+    
+    <nav class="section-nav">
+      <a href="#introduccion" class="nav-link-item"><i class="fa-solid fa-brain"></i> Introducción</a>
+      <a href="#etapas" class="nav-link-item"><i class="fa-solid fa-layer-group"></i> 3 Etapas</a>
+      <a href="#neurotransmisores" class="nav-link-item"><i class="fa-solid fa-dna"></i> Neurotransmisores</a>
+      <a href="#fisiologia" class="nav-link-item"><i class="fa-solid fa-heart-pulse"></i> Efectos Físicos</a>
+      <a href="#mitos" class="nav-link-item"><i class="fa-solid fa-scale-balanced"></i> Mitos y Realidades</a>
+      <a href="#cuestionario" class="nav-link-item"><i class="fa-solid fa-circle-question"></i> Autoevaluación</a>
+    </nav>
+
+    <section id="introduccion" class="content-section">
+      <h2 class="section-title"><i class="fa-solid fa-brain"></i> Introducción: ¿Qué es el Amor desde la Ciencia?</h2>
+      <div class="text-card">
+        <p>Popularmente se cree que el amor reside enteramente en el corazón, sin embargo, la neurociencia y la bioquímica moderna demuestran que el epicentro del enamoramiento se encuentra en el cerebro. Cuando nos enamoramos, se activa un complejo sistema de recompensa y una potente descarga de sustancias químicas que alteran nuestra percepción, conducta y estado de ánimo.</p>
+        <p>Lejos de ser un fenómeno puramente abstracto o mágico, el amor romántico es una respuesta evolutiva programada para garantizar la supervivencia de la especie, el apareamiento y la crianza de la descendencia a través de la formación de vínculos afectivos duraderos.</p>
+      </div>
+    </section>
+
+   
+    <section id="etapas" class="content-section">
+      <h2 class="section-title"><i class="fa-solid fa-layer-group"></i> Las 3 Etapas del Amor (Antropología y Química)</h2>
+      <div class="stages-grid">
+        <div class="stage-card">
+          <span class="stage-number">01</span>
+          <h3 class="stage-title">Lujuria / Deseo</h3>
+          <p class="stage-subtitle">Impulso Reproductivo</p>
+          <p>Impulsado por las hormonas sexuales masculinas y femeninas: la <strong>testosterona</strong> y los <strong>estrógenos</strong>. Su función principal es motivar la búsqueda de pareja y la reproducción a través del deseo físico.</p>
+        </div>
+        <div class="stage-card">
+          <span class="stage-number">02</span>
+          <h3 class="stage-title">Atracción</h3>
+          <p class="stage-subtitle">Enamoramiento e Euforia</p>
+          <p>Fase intensa donde el cerebro inunda el cuerpo con <strong>dopamina</strong>, <strong>norepinefrina</strong> y niveles bajos de <strong>serotonina</strong>. Causa insomnio, pensamientos obsesivos hacia la persona y euforia constante.</p>
+        </div>
+        <div class="stage-card">
+          <span class="stage-number">03</span>
+          <h3 class="stage-title">Apego</h3>
+          <p class="stage-subtitle">Vínculo a Largo Plazo</p>
+          <p>Dominado por la <strong>oxitocina</strong> y la <strong>vasopresina</strong>. Permite mantener un compromiso estable, crianza compartida y sentimientos de seguridad, calma y afecto profundo tras los primeros años.</p>
+        </div>
+      </div>
+    </section>
+
+    
+    <section id="neurotransmisores" class="content-section">
+      <h2 class="section-title"><i class="fa-solid fa-dna"></i> Neurotransmisores y Hormonas Involucradas</h2>
+      <div class="molecules-grid">
+        <div class="molecule-card">
+          <div class="molecule-header">
+            <span class="molecule-name">Dopamina</span>
+            <span class="molecule-tag">Placer y Recompensa</span>
+          </div>
+          <p>Neurotransmisor responsable del circuito de placer del cerebro. Produce energía, atención focalizada y una intensa sensación de felicidad cuando estás cerca de la persona amada.</p>
+        </div>
+        <div class="molecule-card">
+          <div class="molecule-header">
+            <span class="molecule-name">Oxitocina</span>
+            <span class="molecule-tag">Hormona del Vínculo</span>
+          </div>
+          <p>Liberada durante el contacto físico, abrazos y relaciones íntimas. Fomenta la confianza profunda, la ternura y la fidelidad entre parejas.</p>
+        </div>
+        <div class="molecule-card">
+          <div class="molecule-header">
+            <span class="molecule-name">Serotonina</span>
+            <span class="molecule-tag">Regulador Anímico</span>
+          </div>
+          <p>Sus niveles descienden drásticamente durante el enamoramiento inicial, imitando los patrones bioquímicos del trastorno obsesivo-compulsivo (TOC), lo que genera pensamientos recurrentes.</p>
+        </div>
+        <div class="molecule-card">
+          <div class="molecule-header">
+            <span class="molecule-name">Adrenalina y Cortisol</span>
+            <span class="molecule-tag">Estrés y Alerta</span>
+          </div>
+          <p>Hormonas del estrés que provocan el aumento del ritmo cardíaco, sudoración en las manos y la famosa sensación de "mariposas en el estómago" ante la presencia del ser amado.</p>
+        </div>
+      </div>
+    </section>
+
+    
+    <section id="fisiologia" class="content-section">
+      <h2 class="section-title"><i class="fa-solid fa-heart-pulse"></i> Reacciones Fisiológicas del Cuerpo</h2>
+      <div class="symptoms-container">
+        <div class="symptom-item">
+          <div class="symptom-icon"><i class="fa-solid fa-bolt"></i></div>
+          <div class="symptom-info">
+            <h4>Taquicardia</h4>
+            <p>Aumento de pulsaciones por la adrenalina.</p>
+          </div>
+        </div>
+        <div class="symptom-item">
+          <div class="symptom-icon"><i class="fa-solid fa-eye"></i></div>
+          <div class="symptom-info">
+            <h4>Midriasis</h4>
+            <p>Dilatación de pupilas por excitación nerviosa.</p>
+          </div>
+        </div>
+        <div class="symptom-item">
+          <div class="symptom-icon"><i class="fa-solid fa-face-flushed"></i></div>
+          <div class="symptom-info">
+            <h4>Rubor Facial</h4>
+            <p>Vasodilatación sanguínea en mejillas.</p>
+          </div>
+        </div>
+        <div class="symptom-item">
+          <div class="symptom-icon"><i class="fa-solid fa-seedling"></i></div>
+          <div class="symptom-info">
+            <h4>Mariposas en el Estómago</h4>
+            <p>Reducción temporal del flujo sanguíneo digestivo.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+    <section id="mitos" class="content-section">
+      <h2 class="section-title"><i class="fa-solid fa-scale-balanced"></i> Mitos vs. Realidades Científicas</h2>
+      <div class="myths-grid">
+        <div class="myth-card">
+          <div class="myth-title"><i class="fa-solid fa-circle-xmark"></i> Mito Común</div>
+          <p>El amor romántico e intenso dura para siempre con la misma euforia del primer día.</p>
+          <div class="reality-title"><i class="fa-solid fa-circle-check"></i> Realidad Científica</div>
+          <p>La fase de enamoramiento eufórico dura químicamente entre 1 y 3 años; después evoluciona biológicamente hacia una etapa de apego y tranquilidad sostenida.</p>
+        </div>
+        <div class="myth-card">
+          <div class="myth-title"><i class="fa-solid fa-circle-xmark"></i> Mito Común</div>
+          <p>Sentir mariposas en el estómago y nerviosismo extremo es síntoma de que la relación fracasará.</p>
+          <div class="reality-title"><i class="fa-solid fa-circle-check"></i> Realidad Científica</div>
+          <p>Es una respuesta normal del sistema nervioso simpático ante la descarga de adrenalina y cortisol por la presencia de alguien que nos atrae intensamente.</p>
+        </div>
+      </div>
+    </section>
+
+   <!-- Cuestionario de Autoevaluación (6 Preguntas) -->
+<section id="cuestionario" class="content-section">
+  <h2 class="section-title"><i class="fa-solid fa-circle-question"></i> Cuestionario de Autoevaluación</h2>
+  <div class="quiz-box">
+    
+    <!-- Puntuación General -->
+    <div class="quiz-score-header" style="margin-bottom: 20px; font-weight: 600; color: var(--accent-main); font-size: 1.05rem;">
+      Puntuación: <span id="current-score">0</span> / 6
+    </div>
+
+    <!-- Pregunta 1 -->
+    <div class="quiz-item" data-question="1" style="margin-bottom: 28px;">
+      <div class="quiz-question">1. ¿Qué neurotransmisor está principalmente asociado con la euforia y el circuito de recompensa durante el enamoramiento?</div>
+      <div class="quiz-options">
+        <div class="quiz-option" onclick="checkQuizAnswer(this, 1, false)"><span>A) Insulina</span><i class="fa-regular fa-circle"></i></div>
+        <div class="quiz-option" onclick="checkQuizAnswer(this, 1, true)"><span>B) Dopamina</span><i class="fa-regular fa-circle"></i></div>
+        <div class="quiz-option" onclick="checkQuizAnswer(this, 1, false)"><span>C) Melatonina</span><i class="fa-regular fa-circle"></i></div>
+      </div>
+      <div class="quiz-feedback" id="quiz-feedback-1"></div>
+    </div>
+
+    <!-- Pregunta 2 -->
+    <div class="quiz-item" data-question="2" style="margin-bottom: 28px;">
+      <div class="quiz-question">2. Según la antropóloga Helen Fisher, ¿cuáles son las tres etapas en las que se divide el amor romántico?</div>
+      <div class="quiz-options">
+        <div class="quiz-option" onclick="checkQuizAnswer(this, 2, false)"><span>A) Infancia, Juventud, Madurez</span><i class="fa-regular fa-circle"></i></div>
+        <div class="quiz-option" onclick="checkQuizAnswer(this, 2, true)"><span>B) Lujuria/Deseo, Atracción y Apego</span><i class="fa-regular fa-circle"></i></div>
+        <div class="quiz-option" onclick="checkQuizAnswer(this, 2, false)"><span>C) Amistad, Pasión y Compromiso</span><i class="fa-regular fa-circle"></i></div>
+      </div>
+      <div class="quiz-feedback" id="quiz-feedback-2"></div>
+    </div>
+
+    <!-- Pregunta 3 -->
+    <div class="quiz-item" data-question="3" style="margin-bottom: 28px;">
+      <div class="quiz-question">3. ¿Qué hormona es conocida popularmente como "la hormona del vínculo" y se libera al abrazar o entablar contacto físico?</div>
+      <div class="quiz-options">
+        <div class="quiz-option" onclick="checkQuizAnswer(this, 3, true)"><span>A) Oxitocina</span><i class="fa-regular fa-circle"></i></div>
+        <div class="quiz-option" onclick="checkQuizAnswer(this, 3, false)"><span>B) Adrenalina</span><i class="fa-regular fa-circle"></i></div>
+        <div class="quiz-option" onclick="checkQuizAnswer(this, 3, false)"><span>C) Tiroxina</span><i class="fa-regular fa-circle"></i></div>
+      </div>
+      <div class="quiz-feedback" id="quiz-feedback-3"></div>
+    </div>
+
+    <!-- Pregunta 4 -->
+    <div class="quiz-item" data-question="4" style="margin-bottom: 28px;">
+      <div class="quiz-question">4. ¿Qué ocurre con los niveles de serotonina en el cerebro durante las primeras fases del enamoramiento intenso?</div>
+      <div class="quiz-options">
+        <div class="quiz-option" onclick="checkQuizAnswer(this, 4, false)"><span>A) Aumentan drásticamente generando calma</span><i class="fa-regular fa-circle"></i></div>
+        <div class="quiz-option" onclick="checkQuizAnswer(this, 4, false)"><span>B) Se mantienen completamente estables</span><i class="fa-regular fa-circle"></i></div>
+        <div class="quiz-option" onclick="checkQuizAnswer(this, 4, true)"><span>C) Disminuyen de forma notable, imitando patrones del TOC</span><i class="fa-regular fa-circle"></i></div>
+      </div>
+      <div class="quiz-feedback" id="quiz-feedback-4"></div>
+    </div>
+
+    <!-- Pregunta 5 -->
+    <div class="quiz-item" data-question="5" style="margin-bottom: 28px;">
+      <div class="quiz-question">5. ¿Cuál es la causa biológica de la famosa sensación de "mariposas en el estómago" al ver a la persona que te gusta?</div>
+      <div class="quiz-options">
+        <div class="quiz-option" onclick="checkQuizAnswer(this, 5, true)"><span>A) Descarga de adrenalina y cortisol que reduce temporalmente el flujo sanguíneo digestivo</span><i class="fa-regular fa-circle"></i></div>
+        <div class="quiz-option" onclick="checkQuizAnswer(this, 5, false)"><span>B) Una indigestión provocada por comer antes de la cita</span><i class="fa-regular fa-circle"></i></div>
+        <div class="quiz-option" onclick="checkQuizAnswer(this, 5, false)"><span>C) Actividad excesiva de los jugos gástricos por la insulina</span><i class="fa-regular fa-circle"></i></div>
+      </div>
+      <div class="quiz-feedback" id="quiz-feedback-5"></div>
+    </div>
+
+    <!-- Pregunta 6 -->
+    <div class="quiz-item" data-question="6">
+      <div class="quiz-question">6. ¿Cuánto dura típicamente la fase química del enamoramiento eufórico según la ciencia?</div>
+      <div class="quiz-options">
+        <div class="quiz-option" onclick="checkQuizAnswer(this, 6, false)"><span>A) De 10 a 20 años</span><i class="fa-regular fa-circle"></i></div>
+        <div class="quiz-option" onclick="checkQuizAnswer(this, 6, true)"><span>B) Entre 1 y 3 años</span><i class="fa-regular fa-circle"></i></div>
+        <div class="quiz-option" onclick="checkQuizAnswer(this, 6, false)"><span>C) Exactamente una semana</span><i class="fa-regular fa-circle"></i></div>
+      </div>
+      <div class="quiz-feedback" id="quiz-feedback-6"></div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  function setTheme(themeName) {
+    // Cambia el tema en el elemento raíz (html)
+    document.documentElement.setAttribute('data-theme', themeName);
+    
+    // Actualiza los estilos visuales de los botones
+    document.querySelectorAll('.theme-btn').forEach(btn => {
+      btn.classList.remove('active');
+    });
+    
+    const activeBtn = document.getElementById(`btn-theme-${themeName}`);
+    if (activeBtn) {
+      activeBtn.classList.add('active');
+    }
+  }
+</script>
+
+<script>
+  let score = 0;
+  const answeredQuestions = new Set();
+
+  function checkQuizAnswer(element, questionNumber, isCorrect) {
+    if (answeredQuestions.has(questionNumber)) return;
+    answeredQuestions.add(questionNumber);
+
+    const questionItem = element.closest('.quiz-item');
+    const options = questionItem.querySelectorAll('.quiz-option');
+    const feedback = document.getElementById(`quiz-feedback-${questionNumber}`);
+
+    options.forEach(opt => {
+      opt.style.pointerEvents = 'none';
+      // Identificar y marcar la respuesta correcta visualmente
+      const onclickAttr = opt.getAttribute('onclick');
+      if (onclickAttr && onclickAttr.includes('true')) {
+        opt.classList.add('correct');
+        opt.querySelector('i').className = 'fa-solid fa-circle-check';
+        
+      }
+
+    });
+
+    if (isCorrect) {
+      element.classList.add('correct');
+      score++;
+      document.getElementById('current-score').textContent = score;
+      feedback.textContent = '¡Correcto! Has respondido acertadamente.';
+      feedback.className = 'quiz-feedback show correct';
+    } else {
+      element.classList.add('incorrect');
+      element.querySelector('i').className = 'fa-solid fa-circle-xmark';
+      feedback.textContent = 'Incorrecto. La opción marcada en verde era la correcta.';
+      feedback.className = 'quiz-feedback show incorrect';
+    }
+  }
+</script>
+
+  <footer>
+    <div class="container">
+      <p>&copy; ACT_12 LA QUIMICA DEL AMOR (KATHERIN GISELLE DE LEON RUIZ)</p>
+    </div>
+  </footer>
+
+  
+</body>
+</html>
+
+    
